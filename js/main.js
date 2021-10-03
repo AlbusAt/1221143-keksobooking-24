@@ -1,10 +1,9 @@
-const getRandNumber = function (min,max,floatPoint) { // число с плавающей точкой из диапазона "от...до" с указанным "количеством знаков после запятой"
-  let rand_num = min + Math.random() * (max + 1 - min);
-  if (min >= max) {
-    return "Заданы некорректные параметры!"
-  }
-  return rand_num.toFixed(floatPoint) // округление до n-ых знаков после запятой
-};
+function getRandomPositiveFloat (a, b, digits = 1) {
+  const lower = Math.min(Math.abs(a), Math.abs(b));
+  const upper = Math.max(Math.abs(a), Math.abs(b));
+  const result = Math.random() * (upper - lower) + lower;
+  return result.toFixed(digits);
+}
 const avatar = [
   'img/avatars/user01.png',
   'img/avatars/user02.png',
@@ -18,11 +17,11 @@ const avatar = [
   'img/avatars/user10.png',
 ];
 const Type = [
-  palace,
-  flat,
-  house,
-  bungalow,
-  hotel,
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+  'hotel',
 ];
 const CheckIn = [
   '12:00',
@@ -56,7 +55,7 @@ const autor = () => {
   }
 };
 const offer = {
-  title: Keksobook,
+  title: 'Keksobook',
   address: (35.67983, 139.78313),
   price: random(0,100),
   type: getRandom(Type),
