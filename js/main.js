@@ -49,17 +49,13 @@ const PhoTos = [
 const getRandom = (element) => {
   return element[_.random(0,element.length - 1)];
 };
-const autor = () => {
-  return {
-    avatars: getRandom(avatar)
-  }
-};
+const autor = () => { avatars: getRandom(avatar) };
 const offer = {
   title: 'Keksobook',
   address: (35.67983, 139.78313),
-  price: random(0,100),
+  price: Math.random(0,100),
   type: getRandom(Type),
-  guests: random(0,15),
+  guests: Math.random(0,15),
   checkin: getRandom(CheckIn),
   checkout: getRandom(CheckOut),
   features: getRandom(Feat),
@@ -70,3 +66,6 @@ const location = {
   lat: random(35.65000,35.70000),
   lng: random(139.70000, 139.80000),
 };
+const AD_One = Array.from({length: 2}, autor);
+const AD_Two = Array.from({length: 11}, offer);
+const AD_Tree = Array.from({length: 3}, location);
