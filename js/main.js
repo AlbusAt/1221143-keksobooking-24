@@ -1,9 +1,11 @@
+const _ = require('lodash');
 function getRandomPositiveFloat (a, b, digits = 1) {
   const lower = Math.min(Math.abs(a), Math.abs(b));
   const upper = Math.max(Math.abs(a), Math.abs(b));
   const result = Math.random() * (upper - lower) + lower;
   return result.toFixed(digits);
 }
+getRandomPositiveFloat();
 const avatar = [
   'img/avatars/user01.png',
   'img/avatars/user02.png',
@@ -46,26 +48,24 @@ const PhoTos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-const getRandom = (element) => {
-  return element[_.random(0,element.length - 1)];
-};
-const autor = () => { avatars: getRandom(avatar) };
+
+const getRandom = (element) => element[_.random( 0, element.length - 1 )];
+const autor = () => { getRandom(avatar); };
+autor();
 const offer = {
   title: 'Keksobook',
   address: (35.67983, 139.78313),
-  price: Math.random(0,100),
+  price: _.random(0,100),
   type: getRandom(Type),
-  guests: Math.random(0,15),
+  guests: _.random(0,15),
   checkin: getRandom(CheckIn),
   checkout: getRandom(CheckOut),
   features: getRandom(Feat),
-  description: "Большой дом",
+  description: 'Большой дом',
   photos: getRandom(PhoTos),
 };
 const location = {
-  lat: random(35.65000,35.70000),
-  lng: random(139.70000, 139.80000),
+  lat: _.random(35.65000,35.70000),
+  lng: _.random(139.70000, 139.80000),
 };
-const AD_One = Array.from({length: 2}, autor);
-const AD_Two = Array.from({length: 11}, offer);
-const AD_Tree = Array.from({length: 3}, location);
+
