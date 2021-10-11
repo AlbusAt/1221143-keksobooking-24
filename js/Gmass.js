@@ -1,4 +1,4 @@
-const avatar = [
+const avatars = [
   'img/avatars/user01.png',
   'img/avatars/user02.png',
   'img/avatars/user03.png',
@@ -40,4 +40,4 @@ const PhoTos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-export {avatar,Type,CheckIn, CheckOut, Feat, PhoTos};
+export {avatars,Type,CheckIn, CheckOut, Feat, PhoTos};
