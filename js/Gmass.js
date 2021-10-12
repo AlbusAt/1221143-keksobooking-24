@@ -1,4 +1,4 @@
-const avatars = [
+const AVATARS = [
   'img/avatars/user01.png',
   'img/avatars/user02.png',
   'img/avatars/user03.png',
@@ -10,24 +10,24 @@ const avatars = [
   'img/avatars/user09.png',
   'img/avatars/user10.png',
 ];
-const Type = [
+const TYPE = [
   'palace',
   'flat',
   'house',
   'bungalow',
   'hotel',
 ];
-const CheckIn = [
+const CHECK_IN = [
   '12:00',
   '13:00',
   '14:00',
 ];
-const CheckOut = [
+const CHECK_OUT = [
   '12:00',
   '13:00',
   '14:00',
 ];
-const Feat = [
+const FEAT = [
   'wifi',
   'dishwasher',
   'parking',
@@ -35,9 +35,9 @@ const Feat = [
   'elevator',
   'conditioner',
 ];
-const PhoTos = [
+const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-export {avatars,Type,CheckIn, CheckOut, Feat, PhoTos};
+export {AVATARS,TYPE,CHECK_IN, CHECK_OUT, FEAT, PHOTOS};
