@@ -1,3 +1,3 @@
-import { getRandomPositiveFloat, getRandomElements, printAutor, offer, location } from './gfun.js';
+import { getRandomPositiveFloat, printAutor} from './Gfun.js';
 getRandomPositiveFloat();
 printAutor();

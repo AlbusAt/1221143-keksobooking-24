@@ -1,6 +1,9 @@
-import {avatars,TYPE,CHECK_IN, CHECK_OUT, FEAT, PHOTOS, AVATARS} from './gmass.js';
-import {LAT_FROM, LAT_BEFORE, LNG_FROM, LNG_BEFORE} from './gconst.js';
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
+
+import {AVATARS,TYPE,CHECK_IN, CHECK_OUT, FEAT, PHOTOS} from './Gmass.js';
+import {LAT_FROM, LAT_BEFORE, LNG_FROM, LNG_BEFORE} from './gConst.js';
+
+
 const _ = require('lodash');
 
 function getRandomPositiveFloat (a, b, digits = 1) {
@@ -11,12 +14,12 @@ function getRandomPositiveFloat (a, b, digits = 1) {
 }
 
 const getRandomElements = (element) => element[_.random( 0, element.length - 1 )];
-const printAutor = () => { getRandomElements(AVATARS); };
+const PrintAutor = () => { getRandomElements(AVATARS); };
 
-const offers = {
+const offer = {
   title: 'Keksobook',
   address: (35.67983, 139.78313),
-  price: _.random(0,100),
+  price: _.random(2000, 9000),
   type: getRandomElements(TYPE),
   guests: _.random(0,15),
   checkin: getRandomElements(CHECK_IN),
@@ -29,5 +32,7 @@ const location = {
   lat: _.random(LAT_FROM,LAT_BEFORE),
   lng: _.random(LNG_FROM, LNG_BEFORE),
 };
-export {getRandomPositiveFloat, getRandomElements, printAutor,offers,location};
+
+
+export {getRandomPositiveFloat, getRandomElements, PrintAutor ,offer, location};
 
