@@ -33,10 +33,7 @@ const location = {
   lat: _.random(LAT_FROM,LAT_BEFORE),
   lng: _.random(LNG_FROM, LNG_BEFORE),
 };
-function toSymbol(variable) {
-  return (AVATARS(variable));
-}
-console.log(toSymbol());
+
 
 export {PrintAutor ,offer};
 
