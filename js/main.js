@@ -1,3 +1,4 @@
-import { getRandomPositiveFloat, printAutor} from './Gfun.js';
-getRandomPositiveFloat();
-printAutor();
+import './gconst.js';
+import './Gmass.js';
+import './Gfun.js';
+import './similarelem.js';

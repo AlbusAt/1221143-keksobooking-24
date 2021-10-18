@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 
 import {AVATARS,TYPE,CHECK_IN, CHECK_OUT, FEAT, PHOTOS} from './Gmass.js';
-import {LAT_FROM, LAT_BEFORE, LNG_FROM, LNG_BEFORE} from './gConst.js';
+import {LAT_FROM, LAT_BEFORE, LNG_FROM, LNG_BEFORE} from './gconst.js';
 
 
-const _ = require('lodash');
+//const _ = require('lodash');
 
 function getRandomPositiveFloat (a, b, digits = 1) {
   const lower = Math.min(Math.abs(a), Math.abs(b));
@@ -18,7 +18,7 @@ const PrintAutor = () => { getRandomElements(AVATARS); };
 
 const offer = {
   title: 'Keksobook',
-  address: (35.67983, 139.78313),
+  address: _.random(35.67983, 139.78313),
   price: _.random(2000, 9000),
   type: getRandomElements(TYPE),
   guests: _.random(0,15),
@@ -34,5 +34,5 @@ const location = {
 };
 
 
-export {getRandomPositiveFloat, getRandomElements, PrintAutor ,offer, location};
+export {PrintAutor ,offer};
 
