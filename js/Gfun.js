@@ -21,7 +21,8 @@ const offer = {
   address: _.random(35.67983, 139.78313),
   price: _.random(2000, 9000),
   type: getRandomElements(TYPE),
-  guests: _.random(0,15),
+  rooms: _.random(1,5),
+  guests: _.random(1,6),
   checkin: getRandomElements(CHECK_IN),
   checkout: getRandomElements(CHECK_OUT),
   features: getRandomElements(FEAT),
@@ -32,7 +33,10 @@ const location = {
   lat: _.random(LAT_FROM,LAT_BEFORE),
   lng: _.random(LNG_FROM, LNG_BEFORE),
 };
-
+function toSymbol(variable) {
+  return (AVATARS(variable));
+}
+console.log(toSymbol());
 
 export {PrintAutor ,offer};
 
