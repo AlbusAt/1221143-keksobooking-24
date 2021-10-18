@@ -1,4 +1,4 @@
 import './gconst.js';
-import './Gmass.js';
-import './Gfun.js';
+import './gmass.js';
+import './gfun.js';
 import './similarelem.js';

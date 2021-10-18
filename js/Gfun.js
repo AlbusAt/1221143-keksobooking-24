@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import {AVATARS,TYPE,CHECK_IN, CHECK_OUT, FEAT, PHOTOS} from './Gmass.js';
+import {AVATARS,TYPE,CHECK_IN, CHECK_OUT, FEAT, PHOTOS} from './gmass.js';
 import {LAT_FROM, LAT_BEFORE, LNG_FROM, LNG_BEFORE} from './gconst.js';
 
 
@@ -14,11 +14,13 @@ function getRandomPositiveFloat (a, b, digits = 1) {
 }
 
 const getRandomElements = (element) => element[_.random( 0, element.length - 1 )];
-const PrintAutor = () => { getRandomElements(AVATARS); };
+const author = {
+  avatar: getRandomElements(AVATARS),
+};
 
 const offer = {
   title: 'Keksobook',
-  address: _.random(35.67983, 139.78313),
+  address: _.random(LAT_FROM, LNG_BEFORE),
   price: _.random(2000, 9000),
   type: getRandomElements(TYPE),
   rooms: _.random(1,5),
@@ -35,5 +37,5 @@ const location = {
 };
 
 
-export {PrintAutor ,offer};
+export {offer, author};
 
