@@ -1,3 +1,5 @@
-import { getRandomPositiveFloat, getRandomElements, printAutor, offer, location } from './gfun.js';
-getRandomPositiveFloat();
-printAutor();
+import './gconst.js';
+import './gmass.js';
+import './gfun.js';
+import './similarelem.js';
+//import './form.js';
