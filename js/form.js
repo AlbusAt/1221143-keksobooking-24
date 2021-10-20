@@ -1,4 +1,3 @@
-//const indexChildField = 0;
 const DataDisableForm = function () {
   const dataForm = document.querySelector('.ad-form');
   const dataMap = document.querySelector('.map__filters');
