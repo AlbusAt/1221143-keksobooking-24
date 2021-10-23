@@ -21,9 +21,8 @@ userInputTitle.addEventListener('input', () => {
 userInputPrice.addEventListener('input', () => {
   userInputPrice.reportValidity();
 });
-const form = document.querySelector('.ad-form');
 function onChangeRoomNumber () {
-  document.querySelector('#capacity').value = NaN;
+  UserCapacity.value = NaN;
   const value = document.querySelector('#room_number').value;
   if (value === '1') {
     userInputRoomNumber.forEach((element) => {
@@ -54,5 +53,5 @@ function onChangeRoomNumber () {
     });
   }
 }
-document.querySelector('#room_number').addEventListener('change', onChangeRoomNumber);
+UserRooms.addEventListener('change', onChangeRoomNumber);
 onChangeRoomNumber();
