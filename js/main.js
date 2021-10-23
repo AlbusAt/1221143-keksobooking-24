@@ -4,3 +4,4 @@ import './gfun.js';
 import './similarelem.js';
 import './form.js';
 import './user-modal.js';
+import './user-form.js';
