@@ -1,11 +1,10 @@
+import {MAX_TITLE_LENGTH, MIN_TITLE_LENGTH} from './gconst.js';
 const userInputTitle = document.querySelector('#title');
 const userInputPrice = document.querySelector('#price');
 const UserRooms = document.querySelector('#room_number');
 const UserCapacity = document.querySelector('#capacity');
-const userInputRoom = UserRooms.querySelectorAll('option');
 const userInputRoomNumber = UserCapacity.querySelectorAll('option');
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
+
 userInputTitle.addEventListener('input', () => {
   const valueLength = userInputTitle.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
