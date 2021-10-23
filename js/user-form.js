@@ -22,26 +22,6 @@ userInputPrice.addEventListener('input', () => {
   userInputPrice.reportValidity();
 });
 const form = document.querySelector('.ad-form');
-/* UserRooms.addEventListener('change', (evt) => {
-  userInputRoom.forEach((element) => {
-    if (element.value === 1) {
-      userInputRoomNumber.forEach((elements) => {
-        if (elements.value === 2 || elements.value === 3 || elements.value === 0) {
-          elements.disabled = true;
-        } else {elements.disabled = false;}
-      });
-    }
-    if (element.value === 2) {
-      userInputRoomNumber.forEach((elements) => {
-
-        if (elements.value === 3 || elements.value === 0) {
-          elements.disabled = true;
-        } else {elements.disabled = false;}
-      });
-    }
-  });
-});
-**/
 function onChangeRoomNumber () {
   document.querySelector('#capacity').value = NaN;
   const value = document.querySelector('#room_number').value;
