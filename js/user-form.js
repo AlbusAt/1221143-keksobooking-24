@@ -1,4 +1,5 @@
 import {MAX_TITLE_LENGTH, MIN_TITLE_LENGTH} from './gconst.js';
+const userInputAddress = document.querySelector('#address');
 const userInputTitle = document.querySelector('#title');
 const userInputPrice = document.querySelector('#price');
 const UserRooms = document.querySelector('#room_number');
@@ -54,3 +55,5 @@ function onChangeRoomNumber () {
 }
 UserRooms.addEventListener('change', onChangeRoomNumber);
 onChangeRoomNumber();
+
+

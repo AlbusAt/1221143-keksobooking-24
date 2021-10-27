@@ -37,5 +37,5 @@ const location = {
 };
 
 
-export {offer, author};
+export {offer, author, location};
 
