@@ -3,7 +3,10 @@ const userInputAddress = document.querySelector('#address');
 const userInputTitle = document.querySelector('#title');
 const userInputPrice = document.querySelector('#price');
 const UserRooms = document.querySelector('#room_number');
+const UserTypeHouse = document.querySelector('#type');
 const UserCapacity = document.querySelector('#capacity');
+const UserTimeIn = document.querySelector('#timein');
+const UserTimeOut = document.querySelector('#timeout');
 const userInputRoomNumber = UserCapacity.querySelectorAll('option');
 
 userInputTitle.addEventListener('input', () => {
@@ -53,6 +56,57 @@ function onChangeRoomNumber () {
     });
   }
 }
+function onChangePriceHouse () {
+  const value = document.querySelector('#type').value;
+  switch (value) {
+    case 'bungalow':
+      userInputPrice.value = 0;
+      break;
+    case 'flat':
+      userInputPrice.value = 1000;
+      break;
+    case 'hotel':
+      userInputPrice.value = 3000;
+      break;
+    case 'house':
+      userInputPrice.value = 5000;
+      break;
+    case 'palace':
+      userInputPrice.value = 10000;
+      break;
+  }
+}
+function onChangeTimeIn () {
+  const value = document.querySelector('#timein').value;
+  switch (value) {
+    case '12:00':
+      document.querySelector('#timeout').value = '12:00';
+      break;
+    case '13:00':
+      document.querySelector('#timeout').value = '13:00';
+      break;
+    case '14:00':
+      document.querySelector('#timeout').value = '14:00';
+      break;
+  }
+}
+function onChangeTimeOut () {
+  const value = document.querySelector('#timeout').value;
+  switch (value) {
+    case '12:00':
+      document.querySelector('#timein').value = '12:00';
+      break;
+    case '13:00':
+      document.querySelector('#timein').value = '13:00';
+      break;
+    case '14:00':
+      document.querySelector('#timein').value = '14:00';
+      break;
+  }
+}
+UserTimeOut.addEventListener('change', onChangeTimeOut);
+UserTimeIn.addEventListener('change', onChangeTimeIn);
+UserTypeHouse.addEventListener('change', onChangePriceHouse);
 UserRooms.addEventListener('change', onChangeRoomNumber);
 onChangeRoomNumber();
 
