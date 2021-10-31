@@ -1,4 +1,8 @@
-import {location} from './gfun.js';
+import {author, location, showAlert} from './gfun.js';
+import { setUserData } from './load.js';
+const formSumbit = document.querySelector('.ad-form__submit');
+const onSuccess = document.querySelector('#success').content;
+const OnError = document.querySelector('#error').content;
 const DataDisableForm = function () {
   const dataForm = document.querySelector('.ad-form');
   const dataMap = document.querySelector('.map__filters');
@@ -49,48 +53,60 @@ const mainPinMarker = L.marker(
   },
 );
 
-const points = [
-  {
-    title: 'Футура',
-    lat: 35.61854,
-    lng: 139.64996,
-  },
-  {
-    title: 'Шаверма',
-    lat: 35.68067,
-    lng: 139.81189,
-  },
-];
-const createCustomPopup = (point) => {
+const createCustomPopup = (data) => {
   const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');
   const popupElement = balloonTemplate.cloneNode(true);
-
-  //popupElement.querySelector('.popup__title').textContent = point.title;
-  //popupElement.querySelector('.popup__text--address').textContent = `Координаты: ${point.lat}, ${point.lng}`;
-
+  popupElement.querySelector('.popup__avatar').src = data.author.avatar;
+  popupElement.querySelector('.popup__title').textContent = data.offer.title;
+  popupElement.querySelector('.popup__text--address').textContent = data.offer.address;
+  popupElement.querySelector('.popup__text--price').textContent = data.offer.price;
+  popupElement.querySelector('.popup__type').textContent = data.offer.type;
+  popupElement.querySelector('.popup__text--capacity').textContent = `${data.offer.rooms} комнаты для ${data.offer.guests} гостей`;
+  popupElement.querySelector('.popup__text--time').textContent = `Заезд после ${data.offer.checkin}, выезд до ${data.offer.checkout}`;
+  if (data.offer.features !== undefined) {
+    for (const element of data.offer.features) {
+      const li = document.createElement('li');
+      li.classList.add('popup__feature', `popup__feature--${element}`);
+      popupElement.querySelector('.popup__features').append(li);
+    }
+  }
+  popupElement.querySelector('.popup__description').textContent = data.offer.description;
+  if (data.offer.photos !== undefined) {
+    for (const element of data.offer.photos) {
+      const img = document.createElement('img');
+      img.width = 45;
+      img.height = 40;
+      img.alt = 'Фотография жилья';
+      img.src = element;
+      popupElement.querySelector('.popup__photos').append(img);
+    }
+  }
   return popupElement;
 };
-points.forEach((point) => {
-  const {lat,lng} = point;
-  const icon = L.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
+const parserData = (data) => {
 
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon,
-    },
-  );
+  for (const element of data) {
+    const {lat,lng} = element.location;
+    const icon = L.icon({
+      iconUrl: 'img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
 
-  marker.addTo(map);
-  marker.bindPopup(createCustomPopup(point));
-});
+    const marker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon,
+      },
+    );
+
+    marker.addTo(map);
+    marker.bindPopup(createCustomPopup(element));
+  }
+};
 
 mainPinMarker.addTo(map);
 
@@ -98,3 +114,15 @@ mainPinMarker.on('moveend', (evt) => {
   const getCoordinates =  Object.values(evt.target.getLatLng());
   document.querySelector('#address').value = `${getCoordinates[0].toFixed(5)}, ${getCoordinates[1].toFixed(5)}`;
 });
+const setUserFormSubmit = () => {
+  document.querySelector('.ad-form').addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    setUserData(
+      () => showAlert(onSuccess),
+      () => showAlert(OnError),
+      new FormData(evt.target),
+    );
+  });
+};
+setUserFormSubmit();
+export {createCustomPopup, parserData};

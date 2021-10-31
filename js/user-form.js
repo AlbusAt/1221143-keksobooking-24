@@ -104,6 +104,7 @@ function onChangeTimeOut () {
       break;
   }
 }
+
 UserTimeOut.addEventListener('change', onChangeTimeOut);
 UserTimeIn.addEventListener('change', onChangeTimeIn);
 UserTypeHouse.addEventListener('change', onChangePriceHouse);

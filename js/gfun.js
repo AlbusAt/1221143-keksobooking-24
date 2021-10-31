@@ -35,7 +35,25 @@ const location = {
   lat: _.random(LAT_FROM,LAT_BEFORE),
   lng: _.random(LNG_FROM, LNG_BEFORE),
 };
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
+const showAlert = (message) => {
+  const alertContainer = document.createElement('section');
+  const messageServer  = message.cloneNode(true);
+  document.body.appendChild(alertContainer).appendChild(messageServer);
+  const onPopupEscKeydown = (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+    }
+  };
+  document.addEventListener('keydown',() => {
+    onPopupEscKeydown;
+    alertContainer.style.display = 'none';
+  });
+  document.addEventListener('click', () => {
+    alertContainer.style.display = 'none';
+  });
+};
 
-export {offer, author, location};
+export {offer, author, location, showAlert};
 
