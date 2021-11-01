@@ -85,7 +85,7 @@ const createCustomPopup = (data) => {
 };
 const parserData = (data) => {
 
-  for (const element of data) {
+  for (const element of data.slice(0,10)) {
     const {lat,lng} = element.location;
     const icon = L.icon({
       iconUrl: 'img/pin.svg',
