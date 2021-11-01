@@ -1,4 +1,5 @@
 import {author, location, showAlert} from './gfun.js';
+import { getValueFilter } from './similarelem.js';
 import { setUserData } from './load.js';
 const formSumbit = document.querySelector('.ad-form__submit');
 const onSuccess = document.querySelector('#success').content;
@@ -84,8 +85,8 @@ const createCustomPopup = (data) => {
   return popupElement;
 };
 const parserData = (data) => {
-
-  for (const element of data.slice(0,10)) {
+  data = data.slice(0,10);
+  for (const element of data) {
     const {lat,lng} = element.location;
     const icon = L.icon({
       iconUrl: 'img/pin.svg',
@@ -102,7 +103,6 @@ const parserData = (data) => {
         icon,
       },
     );
-
     marker.addTo(map);
     marker.bindPopup(createCustomPopup(element));
   }

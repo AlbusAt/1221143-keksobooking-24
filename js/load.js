@@ -1,4 +1,5 @@
 import {createCustomPopup, parserData} from './form.js';
+import {getDataFiltr} from './similarelem.js';
 fetch('https://24.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
   .then((advertisement) => {
@@ -24,4 +25,4 @@ const setUserData = (onSuccess, onError, body) => {
       onError('Не удалось отправить форму. Попробуйте ещё раз');
     });
 };
-export {setUserData};
+export {setUserData, parserData};
