@@ -1,28 +1,10 @@
-import {createCustomPopup, parserData} from './form.js';
-import {getDataFiltr} from './similarelem.js';
-fetch('https://24.javascript.pages.academy/keksobooking/data')
-  .then((response) => response.json())
-  .then((advertisement) => {
-    parserData(advertisement);
-  });
-const setUserData = (onSuccess, onError, body) => {
-  fetch(
-    'https://24.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      body,
-    },
-  )
-    .then((response) => {
+const getData = (onSuccess) => {
+  fetch('https://24.javascript.pages.academy/keksobooking/data').
+    then((response) => {
       if (response.ok) {
-        document.querySelector('.ad-form__reset').click();
-        onSuccess();
-      } else {
-        onError('Не удалось отправить форму. Попробуйте ещё раз');
+        return response.json();
       }
-    })
-    .catch(() => {
-      onError('Не удалось отправить форму. Попробуйте ещё раз');
-    });
+    }).
+    then(onSuccess);
 };
-export {setUserData, parserData};
+export {getData};
