@@ -9,12 +9,14 @@ const roomsNumberFilterElement = formElement.querySelector('select[name="housing
 const guestsNumberFilterElement = formElement.querySelector('select[name="housing-guests"]');
 const featuresFilterElementList = formElement.querySelectorAll('input[name="features"]');
 
-const DEFAILT_SLICE_ELEMENT = 10;
+const SLICE_SIZE = 10;
 const DEFAULT_DEBOUNCE = 500;
 const DEFAULT_TYPE_FILTER_VALUE = 'any';
 const DEFAULT_PRICE_FILTER_VALUE = 'any';
 const DEFAULT_ROOMS_NUMBER_FILTER_VALUE = 'any';
 const DEFAULT_GUESTS_NUMBER_FILTER_VALUE = 'any';
+
+let FilterData = [];
 
 const PRICE_FILTER_RANGE = {
   low: {
@@ -29,8 +31,6 @@ const PRICE_FILTER_RANGE = {
     from: 50000,
   },
 };
-
-let defaultData = [];
 
 
 const map = L.map('map-canvas').setView({lat: location.lat, lng: location.lng}, 10);
@@ -176,7 +176,7 @@ function removeMarkers () {
 }
 
 const loadMarker = (data) => {
-  data = data.slice(0, DEFAILT_SLICE_ELEMENT);
+  data = data.slice(0, SLICE_SIZE);
   for (const element of data) {
     const {lat,lng} = element.location;
     const icon = L.icon({
@@ -201,14 +201,14 @@ const loadMarker = (data) => {
 };
 
 const loadMap = () => {
-  const filterData = filterByFeatures(filterByGuestsNumber(filterByRoomsNumber(filterByPrice(filterByType(defaultData)))));
+  const filterData = filterByFeatures(filterByGuestsNumber(filterByRoomsNumber(filterByPrice(filterByType(FilterData)))));
   removeMarkers();
   loadMarker(filterData);
 };
 
 const generateCommonMarkers = (data) => {
   addMainPoint();
-  defaultData = data;
+  FilterData = data;
   loadMap();
 };
 

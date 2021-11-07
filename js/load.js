@@ -9,4 +9,4 @@ const getData = (onSuccess) => {
     }).
     then(onSuccess);
 };
-export {getData};
+export { getData };
