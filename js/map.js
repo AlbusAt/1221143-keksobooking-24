@@ -1,4 +1,4 @@
-import {location} from './gfun.js';
+import { location } from './gfun.js';
 import { getData } from './load.js';
 import { debounce } from './utils/debounce.js';
 

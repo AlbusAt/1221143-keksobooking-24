@@ -1,8 +1,11 @@
 
 import {showAlert} from './gfun.js';
 
-const chSuccess = document.querySelector('#success').content;
-const chError = document.querySelector('#error').content;
+const Success = document.querySelector('#success').content;
+const Error = document.querySelector('#error').content;
+
+const URL_DATA = 'https://24.javascript.pages.academy/keksobooking/data';
+const URL_FORM = 'https://24.javascript.pages.academy/keksobooking';
 
 const DataDisableForm = function () {
   const dataForm = document.querySelector('.ad-form');
@@ -28,7 +31,7 @@ const DataDisableForm = function () {
 
 const setUserData = (onSuccess, onError, body) => {
   fetch(
-    'https://24.javascript.pages.academy/keksobooking',
+    URL_FORM,
     {
       method: 'POST',
       body,
@@ -51,10 +54,12 @@ const setUserFormSubmit = () => {
   document.querySelector('.ad-form').addEventListener('submit', (evt) => {
     evt.preventDefault();
     setUserData(
-      () => showAlert(chSuccess),
-      () => showAlert(chError),
+      () => showAlert(Success),
+      () => showAlert(Error),
       new FormData(evt.target),
     );
   });
 };
 setUserFormSubmit();
+
+export { URL_DATA };
