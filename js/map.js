@@ -16,7 +16,7 @@ const DEFAULT_PRICE_FILTER_VALUE = 'any';
 const DEFAULT_ROOMS_NUMBER_FILTER_VALUE = 'any';
 const DEFAULT_GUESTS_NUMBER_FILTER_VALUE = 'any';
 
-let FilterData = [];
+let filterDataObj = [];
 
 const PRICE_FILTER_RANGE = {
   low: {
@@ -201,14 +201,14 @@ const loadMarker = (data) => {
 };
 
 const loadMap = () => {
-  const filterData = filterByFeatures(filterByGuestsNumber(filterByRoomsNumber(filterByPrice(filterByType(FilterData)))));
+  const filterData = filterByFeatures(filterByGuestsNumber(filterByRoomsNumber(filterByPrice(filterByType(filterDataObj)))));
   removeMarkers();
   loadMarker(filterData);
 };
 
 const generateCommonMarkers = (data) => {
   addMainPoint();
-  FilterData = data;
+  filterDataObj = data;
   loadMap();
 };
 
