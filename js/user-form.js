@@ -1,5 +1,3 @@
-
-const userInputAddress = document.querySelector('#address');
 const userInputTitle = document.querySelector('#title');
 const userInputPrice = document.querySelector('#price');
 const userRooms = document.querySelector('#room_number');
