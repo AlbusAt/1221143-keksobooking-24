@@ -26,7 +26,7 @@
 
       <!-- Фильтрация объявлений -->
       <div class="map__filters-container">
-        <form method="post" action="https://24.javascript.pages.academy/keksobooking" type="multipart/form-data" class="map__filters" autocomplete="off">
+        <form method="post" action="https://24.javascript.pages.academy/keksobooking" type="multipart/form-data" class="map__filters" autocomplete="off" name="filter-form">
           <select name="housing-type" id="housing-type" class="map__filter">
             <option value="any" selected>Любой тип жилья</option>
             <option value="bungalow">Бунгало</option>
@@ -94,7 +94,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text">
+          <input id="address" name="address" type="text" readonly>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -225,7 +225,6 @@
       <button type="button" class="error__button">Попробовать снова</button>
     </div>
   </template>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>

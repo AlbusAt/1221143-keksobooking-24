@@ -1,13 +1,18 @@
-import {MAX_TITLE_LENGTH, MIN_TITLE_LENGTH} from './gconst.js';
-const userInputAddress = document.querySelector('#address');
 const userInputTitle = document.querySelector('#title');
 const userInputPrice = document.querySelector('#price');
-const UserRooms = document.querySelector('#room_number');
-const UserTypeHouse = document.querySelector('#type');
-const UserCapacity = document.querySelector('#capacity');
-const UserTimeIn = document.querySelector('#timein');
-const UserTimeOut = document.querySelector('#timeout');
-const userInputRoomNumber = UserCapacity.querySelectorAll('option');
+const userRooms = document.querySelector('#room_number');
+const userTypeHouse = document.querySelector('#type');
+const userCapacity = document.querySelector('#capacity');
+const userTimeIn = document.querySelector('#timein');
+const userTimeOut = document.querySelector('#timeout');
+const userInputRoomNumber = userCapacity.querySelectorAll('option');
+const blockUserAvatar = document.querySelector('.ad-form-header__preview img');
+const blockUserPhoto = document.querySelector('.ad-form__photo');
+const inputAvatar = document.querySelector('#avatar');
+const inputPhoto = document.querySelector('#images');
+
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
 
 userInputTitle.addEventListener('input', () => {
   const valueLength = userInputTitle.value.length;
@@ -21,11 +26,10 @@ userInputTitle.addEventListener('input', () => {
 
   userInputTitle.reportValidity();
 });
-userInputPrice.addEventListener('input', () => {
-  userInputPrice.reportValidity();
-});
+
+
 function onChangeRoomNumber () {
-  UserCapacity.value = NaN;
+  userCapacity.value = NaN;
   const value = document.querySelector('#room_number').value;
   if (value === '1') {
     userInputRoomNumber.forEach((element) => {
@@ -56,6 +60,7 @@ function onChangeRoomNumber () {
     });
   }
 }
+
 function onChangePriceHouse () {
   const value = document.querySelector('#type').value;
   switch (value) {
@@ -76,6 +81,7 @@ function onChangePriceHouse () {
       break;
   }
 }
+
 function onChangeTimeIn () {
   const value = document.querySelector('#timein').value;
   switch (value) {
@@ -90,6 +96,7 @@ function onChangeTimeIn () {
       break;
   }
 }
+
 function onChangeTimeOut () {
   const value = document.querySelector('#timeout').value;
   switch (value) {
@@ -105,10 +112,27 @@ function onChangeTimeOut () {
   }
 }
 
-UserTimeOut.addEventListener('change', onChangeTimeOut);
-UserTimeIn.addEventListener('change', onChangeTimeIn);
-UserTypeHouse.addEventListener('change', onChangePriceHouse);
-UserRooms.addEventListener('change', onChangeRoomNumber);
+function adUserAvatar () {
+  const file = inputAvatar.files[0];
+  blockUserAvatar.src = URL.createObjectURL(file);
+}
+
+function adUserPhoto () {
+  const file = inputPhoto.files[0];
+  const adForImgUserPhoto = document.createElement('img');
+  adForImgUserPhoto.width = 75;
+  adForImgUserPhoto.height = 70;
+  adForImgUserPhoto.src = URL.createObjectURL(file);
+  blockUserPhoto.append(adForImgUserPhoto);
+}
+
+inputAvatar.addEventListener('change', adUserAvatar);
+inputPhoto.addEventListener('change', adUserPhoto);
+userInputPrice.addEventListener('input', () => { userInputPrice.reportValidity(); }); //Сократил для визуальной красоты
+userTimeOut.addEventListener('change', onChangeTimeOut);
+userTimeIn.addEventListener('change', onChangeTimeIn);
+userTypeHouse.addEventListener('change', onChangePriceHouse);
+userRooms.addEventListener('change', onChangeRoomNumber);
 onChangeRoomNumber();
 
 
