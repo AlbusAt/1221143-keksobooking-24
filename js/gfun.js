@@ -33,5 +33,7 @@ const showAlert = (message) => {
 
 };
 
-export { location, showAlert };
-
+export {
+  location,
+  showAlert
+};

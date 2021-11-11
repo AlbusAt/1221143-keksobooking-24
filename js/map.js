@@ -8,6 +8,8 @@ const priceFilterElement = formElement.querySelector('select[name="housing-price
 const roomsNumberFilterElement = formElement.querySelector('select[name="housing-rooms"]');
 const guestsNumberFilterElement = formElement.querySelector('select[name="housing-guests"]');
 const featuresFilterElementList = formElement.querySelectorAll('input[name="features"]');
+const formSubmit = document.querySelector('.ad-form__submit');
+const formReset = document.querySelector('.ad-form__reset');
 
 const SLICE_SIZE = 10;
 const DEFAULT_DEBOUNCE = 500;
@@ -16,7 +18,7 @@ const DEFAULT_PRICE_FILTER_VALUE = 'any';
 const DEFAULT_ROOMS_NUMBER_FILTER_VALUE = 'any';
 const DEFAULT_GUESTS_NUMBER_FILTER_VALUE = 'any';
 
-let filterDataObj = [];
+let filters = [];
 
 const PRICE_FILTER_RANGE = {
   low: {
@@ -201,16 +203,24 @@ const loadMarker = (data) => {
 };
 
 const loadMap = () => {
-  const filterData = filterByFeatures(filterByGuestsNumber(filterByRoomsNumber(filterByPrice(filterByType(filterDataObj)))));
+  const filterData = filterByFeatures(filterByGuestsNumber(filterByRoomsNumber(filterByPrice(filterByType(filters)))));
   removeMarkers();
   loadMarker(filterData);
 };
 
 const generateCommonMarkers = (data) => {
   addMainPoint();
-  filterDataObj = data;
+  filters = data;
   loadMap();
 };
+
+
+function getClosePopup () {
+  map.closePopup();
+}
+
+formReset.addEventListener('click', getClosePopup);
+formSubmit.addEventListener('click', getClosePopup);
 
 typeFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
 priceFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));

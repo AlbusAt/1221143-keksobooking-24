@@ -11,8 +11,23 @@ const blockUserPhoto = document.querySelector('.ad-form__photo');
 const inputAvatar = document.querySelector('#avatar');
 const inputPhoto = document.querySelector('#images');
 
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const PRICE_HOUSE_BUNGALOW = 0;
+const PRICE_HOUSE_FLAT = 1000;
+const PRICE_HOUSE_HOTEL = 3000;
+const PRICE_HOUSE_HOUSE = 5000;
+const PRICE_HOUSE_PALACE = 10000;
+
+const MAX_TYPE_PRICE = 1000000;
+const MIN_HOUSING_PRICES = {
+  bungalow: '0',
+  flat: '1000',
+  hotel: '3000',
+  house: '5000',
+  palace: '10000',
+};
 
 userInputTitle.addEventListener('input', () => {
   const valueLength = userInputTitle.value.length;
@@ -61,26 +76,36 @@ function onChangeRoomNumber () {
   }
 }
 
-function onChangePriceHouse () {
-  const value = document.querySelector('#type').value;
-  switch (value) {
+function onChangeTypeHouse () {
+  const valueType = document.querySelector('#type').value;
+  switch (valueType) {
     case 'bungalow':
-      userInputPrice.value = 0;
+      userInputPrice.placeholder = PRICE_HOUSE_BUNGALOW;
       break;
     case 'flat':
-      userInputPrice.value = 1000;
+      userInputPrice.placeholder = PRICE_HOUSE_FLAT;
       break;
     case 'hotel':
-      userInputPrice.value = 3000;
+      userInputPrice.placeholder = PRICE_HOUSE_HOTEL;
       break;
     case 'house':
-      userInputPrice.value = 5000;
+      userInputPrice.placeholder = PRICE_HOUSE_HOUSE;
       break;
     case 'palace':
-      userInputPrice.value = 10000;
+      userInputPrice.placeholder = PRICE_HOUSE_PALACE;
       break;
   }
 }
+
+userInputPrice.addEventListener('input', () => {
+  const valuePrice = userInputPrice.value;
+  if (valuePrice > MAX_TYPE_PRICE) {
+    userInputPrice.setCustomValidity('Цена не должна превышать 1 000 000');
+  } else {
+    userInputPrice.setCustomValidity('');
+  }
+  userInputPrice.reportValidity();
+});
 
 function onChangeTimeIn () {
   const value = document.querySelector('#timein').value;
@@ -126,13 +151,15 @@ function adUserPhoto () {
   blockUserPhoto.append(adForImgUserPhoto);
 }
 
+
+userTypeHouse.addEventListener('change', () => {
+  userInputPrice.min = MIN_HOUSING_PRICES[userTypeHouse.value];
+  userInputPrice.placeholder = MIN_HOUSING_PRICES[userTypeHouse.value];
+  userInputPrice.reportValidity();
+});
 inputAvatar.addEventListener('change', adUserAvatar);
 inputPhoto.addEventListener('change', adUserPhoto);
-userInputPrice.addEventListener('input', () => { userInputPrice.reportValidity(); }); //Сократил для визуальной красоты
 userTimeOut.addEventListener('change', onChangeTimeOut);
 userTimeIn.addEventListener('change', onChangeTimeIn);
-userTypeHouse.addEventListener('change', onChangePriceHouse);
+userTypeHouse.addEventListener('change', onChangeTypeHouse);
 userRooms.addEventListener('change', onChangeRoomNumber);
-onChangeRoomNumber();
-
-
