@@ -42,7 +42,6 @@ userInputTitle.addEventListener('input', () => {
   userInputTitle.reportValidity();
 });
 
-
 function onChangeRoomNumber () {
   userCapacity.value = NaN;
   const value = document.querySelector('#room_number').value;
@@ -137,18 +136,18 @@ function onChangeTimeOut () {
   }
 }
 
-function adUserAvatar () {
+function addUserAvatar () {
   const file = inputAvatar.files[0];
   blockUserAvatar.src = URL.createObjectURL(file);
 }
 
-function adUserPhoto () {
+function addUserPhoto () {
   const file = inputPhoto.files[0];
-  const adForImgUserPhoto = document.createElement('img');
-  adForImgUserPhoto.width = 75;
-  adForImgUserPhoto.height = 70;
-  adForImgUserPhoto.src = URL.createObjectURL(file);
-  blockUserPhoto.append(adForImgUserPhoto);
+  const addForImgUserPhoto = document.createElement('img');
+  addForImgUserPhoto.width = 75;
+  addForImgUserPhoto.height = 70;
+  addForImgUserPhoto.src = URL.createObjectURL(file);
+  blockUserPhoto.append(addForImgUserPhoto);
 }
 
 
@@ -157,8 +156,8 @@ userTypeHouse.addEventListener('change', () => {
   userInputPrice.placeholder = MIN_HOUSING_PRICES[userTypeHouse.value];
   userInputPrice.reportValidity();
 });
-inputAvatar.addEventListener('change', adUserAvatar);
-inputPhoto.addEventListener('change', adUserPhoto);
+inputAvatar.addEventListener('change', addUserAvatar);
+inputPhoto.addEventListener('change', addUserPhoto);
 userTimeOut.addEventListener('change', onChangeTimeOut);
 userTimeIn.addEventListener('change', onChangeTimeIn);
 userTypeHouse.addEventListener('change', onChangeTypeHouse);
