@@ -43,6 +43,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   },
 ).addTo(map);
 
+let DEFAULT_MAIN_POINT = null;
 
 function addMainPoint () {
   const mainPinIcon = L.icon({
@@ -50,7 +51,7 @@ function addMainPoint () {
     iconSize: [52, 52],
     iconAnchor: [26, 52],
   });
-  const mainPinMarker = L.marker(
+  DEFAULT_MAIN_POINT = L.marker(
     {
       lat: location.lat,
       lng: location.lng,
@@ -60,13 +61,19 @@ function addMainPoint () {
       icon: mainPinIcon,
     },
   );
-  mainPinMarker.addTo(map);
-  mainPinMarker.on('moveend', (evt) => {
+  DEFAULT_MAIN_POINT.addTo(map);
+  DEFAULT_MAIN_POINT.on('moveend', (evt) => {
     const getCoordinates =  Object.values(evt.target.getLatLng());
     document.querySelector('#address').value = `${getCoordinates[0].toFixed(5)}, ${getCoordinates[1].toFixed(5)}`;
   });
 }
 
+function setMainPoint () {
+  if (DEFAULT_MAIN_POINT !== null) {
+    DEFAULT_MAIN_POINT.remove();
+    addMainPoint();
+  } else {addMainPoint();}
+}
 
 const createCustomPopup = (data) => {
   const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -219,8 +226,21 @@ function getClosePopup () {
   map.closePopup();
 }
 
+function gds () {
+  typeFilterElement.value = DEFAULT_TYPE_FILTER_VALUE;
+  priceFilterElement.value = DEFAULT_PRICE_FILTER_VALUE;
+  roomsNumberFilterElement.value = DEFAULT_ROOMS_NUMBER_FILTER_VALUE;
+  guestsNumberFilterElement.value = DEFAULT_GUESTS_NUMBER_FILTER_VALUE;
+  loadMap();
+  setMainPoint();
+}
+
+
 formReset.addEventListener('click', getClosePopup);
 formSubmit.addEventListener('click', getClosePopup);
+
+formReset.addEventListener('click', gds);
+formSubmit.addEventListener('click', gds);
 
 typeFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
 priceFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
