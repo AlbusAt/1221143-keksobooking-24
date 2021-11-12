@@ -106,76 +106,6 @@ const createCustomPopup = (data) => {
   return popupElement;
 };
 
-function filterByType (markers) {
-  if (typeFilterElement.value !== DEFAULT_TYPE_FILTER_VALUE) {
-    markers = markers.filter((marker) => (marker.offer.type) ? marker.offer.type === typeFilterElement.value : false);
-  }
-  return markers;
-}
-const filterByPrice = (markers) => {
-  const priceCurrentType = PRICE_FILTER_RANGE[priceFilterElement.value];
-  if (priceFilterElement.value !== DEFAULT_PRICE_FILTER_VALUE && priceCurrentType) {
-    markers = markers.filter((marker) => {
-      if (!marker.offer.price) {
-        return false;
-      }
-
-      const priceValue = Number(marker.offer.price);
-      if (priceValue >= priceCurrentType.from) {
-        if (priceCurrentType.to) {
-          if (priceValue < priceCurrentType.to) {
-            return true;
-          }
-        } else {
-          return true;
-        }
-      }
-      return false;
-    });
-  }
-  return markers;
-};
-const filterByRoomsNumber = (markers) => {
-  if (roomsNumberFilterElement.value !== DEFAULT_ROOMS_NUMBER_FILTER_VALUE) {
-    const roomsNumber = Number(roomsNumberFilterElement.value);
-    markers = markers.filter((marker) => {
-      if (!marker.offer.rooms) {
-        return false;
-      }
-      return Number(marker.offer.rooms) === roomsNumber;
-    });
-  }
-  return markers;
-};
-
-const filterByGuestsNumber = (markers) => {
-  if (guestsNumberFilterElement.value !== DEFAULT_GUESTS_NUMBER_FILTER_VALUE) {
-    const guestsNumber = Number(guestsNumberFilterElement.value);
-    markers = markers.filter((marker) => {
-      if (typeof marker.offer.guests === 'undefined') {
-        return false;
-      }
-      return Number(marker.offer.guests) === guestsNumber;
-    });
-  }
-  return markers;
-};
-
-const filterByFeatures = (markers) => {
-  let filteredCards = markers;
-  featuresFilterElementList.forEach((featuresFilterElement) => {
-    if (featuresFilterElement.checked) {
-      filteredCards = filteredCards.filter((marker) => {
-        if (!marker.offer.features) {
-          return false;
-        }
-        return marker.offer.features.includes(featuresFilterElement.value);
-      });
-    }
-  });
-  return filteredCards;
-};
-
 const storeMarkers = [];
 
 function removeMarkers () {
@@ -209,11 +139,67 @@ const loadMarker = (data) => {
   }
 };
 
+function addFilter (markers) {
+  if (typeFilterElement.value !== DEFAULT_TYPE_FILTER_VALUE) {
+    markers = markers.filter((marker) => (marker.offer.type) ? marker.offer.type === typeFilterElement.value : false);
+  }
+  const priceCurrentType = PRICE_FILTER_RANGE[priceFilterElement.value];
+  if (priceFilterElement.value !== DEFAULT_PRICE_FILTER_VALUE && priceCurrentType) {
+    markers = markers.filter((marker) => {
+      if (!marker.offer.price) {
+        return false;
+      }
+      const priceValue = Number(marker.offer.price);
+      if (priceValue >= priceCurrentType.from) {
+        if (priceCurrentType.to) {
+          if (priceValue < priceCurrentType.to) {
+            return true;
+          }
+        } else {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+  if (roomsNumberFilterElement.value !== DEFAULT_ROOMS_NUMBER_FILTER_VALUE) {
+    const roomsNumber = Number(roomsNumberFilterElement.value);
+    markers = markers.filter((marker) => {
+      if (!marker.offer.rooms) {
+        return false;
+      }
+      return Number(marker.offer.rooms) === roomsNumber;
+    });
+  }
+  if (guestsNumberFilterElement.value !== DEFAULT_GUESTS_NUMBER_FILTER_VALUE) {
+    const guestsNumber = Number(guestsNumberFilterElement.value);
+    markers = markers.filter((marker) => {
+      if (typeof marker.offer.guests === 'undefined') {
+        return false;
+      }
+      return Number(marker.offer.guests) === guestsNumber;
+    });
+  }
+  let filteredCards = markers;
+  featuresFilterElementList.forEach((featuresFilterElement) => {
+    if (featuresFilterElement.checked) {
+      filteredCards = filteredCards.filter((marker) => {
+        if (!marker.offer.features) {
+          return false;
+        }
+        return marker.offer.features.includes(featuresFilterElement.value);
+      });
+    }
+  });
+  return filteredCards;
+}
+
 const loadMap = () => {
-  const filterData = filterByFeatures(filterByGuestsNumber(filterByRoomsNumber(filterByPrice(filterByType(filters)))));
+  const filterData = addFilter(filters);
   removeMarkers();
   loadMarker(filterData);
 };
+
 
 const generateCommonMarkers = (data) => {
   addMainPoint();
@@ -242,12 +228,6 @@ formSubmit.addEventListener('click', getClosePopup);
 formReset.addEventListener('click', gds);
 formSubmit.addEventListener('click', gds);
 
-typeFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
-priceFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
-roomsNumberFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
-
-guestsNumberFilterElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
-featuresFilterElementList.forEach((element) =>
-  element.addEventListener('click', debounce(loadMap, DEFAULT_DEBOUNCE)));
+formElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
 
 getData(generateCommonMarkers);
