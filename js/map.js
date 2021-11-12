@@ -208,11 +208,8 @@ const generateCommonMarkers = (data) => {
 };
 
 
-function getClosePopup () {
+function onSubmitClickHandler () {
   map.closePopup();
-}
-
-function gds () {
   typeFilterElement.value = DEFAULT_TYPE_FILTER_VALUE;
   priceFilterElement.value = DEFAULT_PRICE_FILTER_VALUE;
   roomsNumberFilterElement.value = DEFAULT_ROOMS_NUMBER_FILTER_VALUE;
@@ -221,12 +218,9 @@ function gds () {
   setMainPoint();
 }
 
+formReset.addEventListener('click', onSubmitClickHandler);
+formSubmit.addEventListener('click', onSubmitClickHandler);
 
-formReset.addEventListener('click', getClosePopup);
-formSubmit.addEventListener('click', getClosePopup);
-
-formReset.addEventListener('click', gds);
-formSubmit.addEventListener('click', gds);
 
 formElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
 
