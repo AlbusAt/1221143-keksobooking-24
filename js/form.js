@@ -7,6 +7,11 @@ const error = document.querySelector('#error').content;
 const URL_DATA = 'https://24.javascript.pages.academy/keksobooking/data';
 const URL_FORM = 'https://24.javascript.pages.academy/keksobooking';
 
+const DataDisableForm = function () {
+  const dataMap = document.querySelector('.map__filters');
+  dataMap.classList.add('map__filters--disabled');
+};
+
 const setUserData = (onSuccess, onError, body) => {
   fetch(
     URL_FORM,
@@ -40,4 +45,7 @@ const setUserFormSubmit = () => {
 };
 setUserFormSubmit();
 
-export { URL_DATA };
+export {
+  URL_DATA,
+  DataDisableForm
+};
