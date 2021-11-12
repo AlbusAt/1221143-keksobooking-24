@@ -11,6 +11,11 @@ const featuresFilterElementList = formElement.querySelectorAll('input[name="feat
 const formSubmit = document.querySelector('.ad-form__submit');
 const formReset = document.querySelector('.ad-form__reset');
 
+let DEFAULT_MAIN_POINT = null;
+const MAIN_ICON_SIZE = 52;
+const MAIN_ICON_ANCHOR = 26;
+const POPUP_IMG_HEIGHT = 40;
+const POPUP_IMG_WIDTH = 45;
 const SLICE_SIZE = 10;
 const DEFAULT_DEBOUNCE = 500;
 const DEFAULT_TYPE_FILTER_VALUE = 'any';
@@ -43,13 +48,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   },
 ).addTo(map);
 
-let DEFAULT_MAIN_POINT = null;
-
 function addMainPoint () {
   const mainPinIcon = L.icon({
     iconUrl: 'img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
+    iconSize: [MAIN_ICON_SIZE, MAIN_ICON_SIZE],
+    iconAnchor: [MAIN_ICON_ANCHOR, MAIN_ICON_SIZE],
   });
   DEFAULT_MAIN_POINT = L.marker(
     {
@@ -96,8 +99,8 @@ const createCustomPopup = (data) => {
   if (data.offer.photos !== undefined) {
     for (const element of data.offer.photos) {
       const img = document.createElement('img');
-      img.width = 45;
-      img.height = 40;
+      img.width = POPUP_IMG_WIDTH;
+      img.height = POPUP_IMG_HEIGHT;
       img.alt = 'Фотография жилья';
       img.src = element;
       popupElement.querySelector('.popup__photos').append(img);
@@ -220,8 +223,6 @@ function onSubmitClickHandler () {
 
 formReset.addEventListener('click', onSubmitClickHandler);
 formSubmit.addEventListener('click', onSubmitClickHandler);
-
-
 formElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
 
 getData(generateCommonMarkers);

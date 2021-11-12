@@ -20,6 +20,14 @@ const PRICE_HOUSE_HOTEL = 3000;
 const PRICE_HOUSE_HOUSE = 5000;
 const PRICE_HOUSE_PALACE = 10000;
 
+const NULL_ROOM_NUMBER = '0';
+const ONE_ROOM_NUMBER = '1';
+const TWO_ROOM_NUMBER = '2';
+const THREE_ROOM_NUMBER = '3';
+const ANY_ROOM_NUMBER = '100';
+const USER_IMG_HEIGHT = 70;
+const USER_IMG_WIDTH = 75;
+
 const MAX_TYPE_PRICE = 1000000;
 const MIN_HOUSING_PRICES = {
   bungalow: '0',
@@ -45,30 +53,30 @@ userInputTitle.addEventListener('input', () => {
 function onChangeRoomNumber () {
   userCapacity.value = NaN;
   const value = document.querySelector('#room_number').value;
-  if (value === '1') {
+  if (value === ONE_ROOM_NUMBER) {
     userInputRoomNumber.forEach((element) => {
-      if (element.value === '2' || element.value === '3' || element.value === '0') {
+      if (element.value === TWO_ROOM_NUMBER || element.value === THREE_ROOM_NUMBER || element.value === NULL_ROOM_NUMBER) {
         element.disabled = true;
       } else {element.disabled = false;}
     });
   }
-  if (value === '2') {
+  if (value === TWO_ROOM_NUMBER) {
     userInputRoomNumber.forEach((element) => {
-      if (element.value === '3' || element.value === '0') {
+      if (element.value === THREE_ROOM_NUMBER || element.value === NULL_ROOM_NUMBER) {
         element.disabled = true;
       } else {element.disabled = false;}
     });
   }
-  if (value === '3') {
+  if (value === THREE_ROOM_NUMBER) {
     userInputRoomNumber.forEach((element) => {
-      if (element.value === '0') {
+      if (element.value === NULL_ROOM_NUMBER) {
         element.disabled = true;
       } else {element.disabled = false;}
     });
   }
-  if (value === '100') {
+  if (value === ANY_ROOM_NUMBER) {
     userInputRoomNumber.forEach((element) => {
-      if (element.value === '1' || element.value === '2' || element.value === '3') {
+      if (element.value === ONE_ROOM_NUMBER || element.value === TWO_ROOM_NUMBER || element.value === THREE_ROOM_NUMBER) {
         element.disabled = true;
       } else {element.disabled = false;}
     });
@@ -144,8 +152,8 @@ function addUserAvatar () {
 function addUserPhoto () {
   const file = inputPhoto.files[0];
   const addForImgUserPhoto = document.createElement('img');
-  addForImgUserPhoto.width = 75;
-  addForImgUserPhoto.height = 70;
+  addForImgUserPhoto.width = USER_IMG_WIDTH;
+  addForImgUserPhoto.height = USER_IMG_HEIGHT;
   addForImgUserPhoto.src = URL.createObjectURL(file);
   blockUserPhoto.append(addForImgUserPhoto);
 }
