@@ -8,16 +8,21 @@ const priceFilterElement = formElement.querySelector('select[name="housing-price
 const roomsNumberFilterElement = formElement.querySelector('select[name="housing-rooms"]');
 const guestsNumberFilterElement = formElement.querySelector('select[name="housing-guests"]');
 const featuresFilterElementList = formElement.querySelectorAll('input[name="features"]');
+const addressElement = document.querySelector('#address');
 const formSubmit = document.querySelector('.ad-form__submit');
 const formReset = document.querySelector('.ad-form__reset');
 
 let DEFAULT_MAIN_POINT = null;
 const MAIN_ICON_SIZE = 52;
 const MAIN_ICON_ANCHOR = 26;
+const SECOND_ICON_SIZE = 40;
+const SECOND_ICON_ANCHOR = 20;
 const POPUP_IMG_HEIGHT = 40;
 const POPUP_IMG_WIDTH = 45;
 const SLICE_SIZE = 10;
 const DEFAULT_DEBOUNCE = 500;
+const DEBOUNCE_FOR_FORM = 10;
+const MAP_SETVIEW_SIZE = 10;
 const DEFAULT_TYPE_FILTER_VALUE = 'any';
 const DEFAULT_PRICE_FILTER_VALUE = 'any';
 const DEFAULT_ROOMS_NUMBER_FILTER_VALUE = 'any';
@@ -40,7 +45,9 @@ const PRICE_FILTER_RANGE = {
 };
 
 
-const map = L.map('map-canvas').setView({lat: location.lat, lng: location.lng}, 10);
+const map = L.map('map-canvas').setView({lat: location.lat, lng: location.lng}, MAP_SETVIEW_SIZE);
+
+addressElement.value = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
@@ -67,7 +74,7 @@ function addMainPoint () {
   DEFAULT_MAIN_POINT.addTo(map);
   DEFAULT_MAIN_POINT.on('moveend', (evt) => {
     const getCoordinates =  Object.values(evt.target.getLatLng());
-    document.querySelector('#address').value = `${getCoordinates[0].toFixed(5)}, ${getCoordinates[1].toFixed(5)}`;
+    addressElement.value = `${getCoordinates[0].toFixed(5)}, ${getCoordinates[1].toFixed(5)}`;
   });
 }
 
@@ -123,8 +130,8 @@ const loadMarker = (data) => {
     const {lat,lng} = element.location;
     const icon = L.icon({
       iconUrl: 'img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+      iconSize: [SECOND_ICON_SIZE, SECOND_ICON_SIZE],
+      iconAnchor: [SECOND_ICON_ANCHOR, SECOND_ICON_SIZE],
     });
 
     const marker = L.marker(
@@ -212,6 +219,7 @@ const generateCommonMarkers = (data) => {
 
 
 function onSubmitClickHandler () {
+  addressElement.value = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
   map.closePopup();
   typeFilterElement.value = DEFAULT_TYPE_FILTER_VALUE;
   priceFilterElement.value = DEFAULT_PRICE_FILTER_VALUE;
@@ -221,8 +229,8 @@ function onSubmitClickHandler () {
   setMainPoint();
 }
 
-formReset.addEventListener('click', onSubmitClickHandler);
-formSubmit.addEventListener('click', onSubmitClickHandler);
+formReset.addEventListener('click', debounce(onSubmitClickHandler, DEBOUNCE_FOR_FORM));
+formSubmit.addEventListener('click',  debounce(onSubmitClickHandler, DEBOUNCE_FOR_FORM));
 formElement.addEventListener('change', debounce(loadMap, DEFAULT_DEBOUNCE));
 
 getData(generateCommonMarkers);
